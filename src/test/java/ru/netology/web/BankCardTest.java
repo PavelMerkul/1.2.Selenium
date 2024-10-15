@@ -34,7 +34,7 @@ public class BankCardTest {
     @Test
     void shouldTestV1() /* Фамилия + пробел + имя */ {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7927");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79271234567");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
