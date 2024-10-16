@@ -15,7 +15,7 @@ public class BankCardTest {
     private WebDriver driver;
 
     @BeforeEach
-    void setUp() {
+    public void setupAll() {
         WebDriverManager.chromedriver().setup(); // Инициализация WebDriverManager
         ChromeOptions options = new ChromeOptions(); // Создание нового объекта ChromeOptions
         options.addArguments("--disable-dev-shm-usage");
@@ -24,6 +24,7 @@ public class BankCardTest {
         driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
     }
+
 
     @AfterEach
     void tearDown() {
