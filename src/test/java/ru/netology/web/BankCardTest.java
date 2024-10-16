@@ -16,8 +16,8 @@ public class BankCardTest {
 
     @BeforeEach
     void setUp() {
-        WebDriverManager.chromedriver().setup(); // Эта строка автоматически настроит ChromeDriver
-        ChromeOptions options = new ChromeOptions();
+        WebDriverManager.chromedriver().setup(); // Инициализация WebDriverManager
+        ChromeOptions options = new ChromeOptions(); // Создание нового объекта ChromeOptions
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
@@ -27,20 +27,23 @@ public class BankCardTest {
 
     @AfterEach
     void tearDown() {
-        driver.quit();
-        driver = null;
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 
     @Test
-    void shouldTestV1() /* Фамилия + пробел + имя */ {
+    void shouldTestV1() { // Фамилия + пробел + имя // Вводим имя
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
+        // Вводим телефон
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
+        // Соглашаемся с условиями
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        // Отправляем форму
         driver.findElement(By.className("button")).click();
+        // Проверяем сообщение об успешной отправке
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
     }
-
-
-
 }
